@@ -9,7 +9,24 @@ class Place(models.Model):
     lat = models.FloatField("latitude")
 
     class Meta:
-        ordering = ['title']
+        ordering = ["title"]
 
     def __str__(self):
         return self.title
+
+
+class Photo(models.Model):
+    image = models.ImageField("Image")
+    position = models.SmallIntegerField("Position")
+    place = models.ForeignKey(
+        "Place",
+        verbose_name="Place",
+        on_delete=models.CASCADE,
+        related_name="photos",
+    )
+
+    class Meta:
+        ordering = ["place__title", "position"]
+
+    def __str__(self):
+        return f"{self.place.title} photo {self.position}"
