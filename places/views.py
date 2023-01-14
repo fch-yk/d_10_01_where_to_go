@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import Place
+from django.urls import reverse
 
 
 def home(request):
@@ -16,13 +17,10 @@ def home(request):
             "properties": {
                 "title": place.title,
                 "placeId": place.id,
-                "detailsUrl": "./static/places/moscow_legends.json",  # FIXME
+                "detailsUrl": reverse(place_details, args=[place.id]),
             }
         }
         features.append(feature)
-
-    # FIXME debug
-    features[1]["properties"]["detailsUrl"] = "./static/places/roofs24.json"
 
     places = {
         "type": "FeatureCollection",
