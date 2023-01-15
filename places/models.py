@@ -1,10 +1,11 @@
 from django.db import models
+from tinymce.models import HTMLField
 
 
 class Place(models.Model):
     title = models.CharField("Title", max_length=200)
     description_short = models.TextField("Short description")
-    description_long = models.TextField("Long description")
+    description_long = HTMLField("Long description")
     lng = models.FloatField("longitude")
     lat = models.FloatField("latitude")
 
