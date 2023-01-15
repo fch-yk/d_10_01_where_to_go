@@ -17,7 +17,13 @@ class Place(models.Model):
 
 class Photo(models.Model):
     image = models.ImageField("Image", upload_to="images")
-    position = models.SmallIntegerField("Position")
+    position = models.PositiveSmallIntegerField(
+        verbose_name="Position",
+        default=0,
+        blank=False,
+        null=False,
+        db_index=True,
+    )
     place = models.ForeignKey(
         "Place",
         verbose_name="Place",

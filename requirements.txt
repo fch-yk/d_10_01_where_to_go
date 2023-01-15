@@ -2,3 +2,4 @@ Django==4.1.*
 environs==9.5.*
 Pillow==9.4.0
 django_debug_toolbar==3.8.1
+django-admin-sortable2==2.1.4

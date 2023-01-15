@@ -1,3 +1,4 @@
+from adminsortable2.admin import SortableAdminMixin, SortableTabularInline
 from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
@@ -5,10 +6,11 @@ from django.utils.safestring import mark_safe
 from .models import Photo, Place
 
 
-class PhotosInline(admin.TabularInline):
+class PhotosInline(SortableTabularInline):
     model = Photo
-    fields = ("image", "preview", "position")
     readonly_fields = ("preview",)
+    ordering = ("position",)
+    extra = 0
 
     def preview(self, obj):
         url = obj.image.url
@@ -25,7 +27,7 @@ class PhotosInline(admin.TabularInline):
 
 
 @admin.register(Place)
-class PlaceAdmin(admin.ModelAdmin):
+class PlaceAdmin(SortableAdminMixin, admin.ModelAdmin):
     readonly_fields = ("id",)
     inlines = [PhotosInline,]
 
