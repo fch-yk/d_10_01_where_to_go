@@ -1,9 +1,27 @@
 from django.contrib import admin
-from .models import Place, Photo
+from django.utils.html import format_html
+from django.utils.safestring import mark_safe
+
+from .models import Photo, Place
 
 
 class PhotosInline(admin.TabularInline):
     model = Photo
+    fields = ("image", "preview", "position")
+    readonly_fields = ("preview",)
+
+    def preview(self, obj):
+        url = obj.image.url
+        width = obj.image.width
+        height = obj.image.height
+        max_height = 200
+        if height > max_height:
+            height = max_height
+            reduction_ratio = obj.image.height / max_height
+            width //= reduction_ratio
+
+        img_tag = f"<img src='{url}' width='{width}' height={height} />"
+        return format_html(mark_safe(img_tag))
 
 
 @admin.register(Place)
@@ -14,4 +32,11 @@ class PlaceAdmin(admin.ModelAdmin):
 
 @admin.register(Photo)
 class PhotoAdmin(admin.ModelAdmin):
-    readonly_fields = ("id",)
+    readonly_fields = ("id", "preview")
+
+    def preview(self, obj):
+        url = obj.image.url
+        width = obj.image.width
+        height = obj.image.height
+        img_tag = f"<img src='{url}' width='{width}' height={height} />"
+        return format_html(mark_safe(img_tag))
