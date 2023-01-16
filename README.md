@@ -20,12 +20,6 @@ Python 3.11 is required.
 pip install -r requirements.txt
 ```
 
-Create SQLite database:
-
-```bash
-python manage.py migrate
-```
-
 - Set up environmental variables in your operating system or in the .env file. The variables are:
 
   - `DEBUG` (optional, `False` by default);
@@ -42,6 +36,12 @@ SECRET_KEY=REPLACE_ME
 ALLOWED_HOSTS=localhost,127.0.0.1,.pythonanywhere.com
 DATABASE=db.sqlite3
 STATIC_ROOT='/static/'
+```
+
+- Create SQLite database:
+
+```bash
+python manage.py migrate
 ```
 
 - Create a superuser:
