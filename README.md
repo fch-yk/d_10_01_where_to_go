@@ -10,7 +10,7 @@ You can see a working example of the site [here](http://fchyk.pythonanywhere.com
 
 Python 3.11 is required.
 
-## Installing
+## Installation
 
 - Download the project files.
 - It is recommended to use [venv](https://docs.python.org/3/library/venv.html?highlight=venv#module-venv) for project isolation.
@@ -50,7 +50,7 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-## Using
+## Usage
 
 - Run a development server:
 
