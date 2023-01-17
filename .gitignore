@@ -5,6 +5,7 @@ pyrightconfig.json
 tmp*.*
 *.code-workspace
 media/
+prod_static/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
