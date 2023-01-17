@@ -14,16 +14,13 @@ class PhotosInline(SortableTabularInline):
 
     def preview(self, obj):
         url = obj.image.url
-        width = obj.image.width
-        height = obj.image.height
-        max_height = 200
-        if height > max_height:
-            height = max_height
-            reduction_ratio = obj.image.height / max_height
-            width //= reduction_ratio
-
-        img_tag = f"<img src='{url}' width='{width}' height={height} />"
-        return format_html(mark_safe(img_tag))
+        img_tag = \
+            "<img style='max-height: 200px; aspect-ratio: {};' src='{}'/>"
+        return format_html(
+            mark_safe(img_tag),
+            obj.image.height // obj.image.width,
+            url,
+        )
 
 
 @admin.register(Place)
@@ -35,11 +32,4 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
 
 @admin.register(Photo)
 class PhotoAdmin(admin.ModelAdmin):
-    readonly_fields = ("id", "preview")
-
-    def preview(self, obj):
-        url = obj.image.url
-        width = obj.image.width
-        height = obj.image.height
-        img_tag = f"<img src='{url}' width='{width}' height={height} />"
-        return format_html(mark_safe(img_tag))
+    readonly_fields = ("id",)
