@@ -22,8 +22,6 @@ class Photo(models.Model):
     position = models.PositiveSmallIntegerField(
         verbose_name="Position",
         default=0,
-        blank=False,
-        null=False,
         db_index=True,
     )
     place = models.ForeignKey(
