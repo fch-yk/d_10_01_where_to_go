@@ -22,11 +22,11 @@ pip install -r requirements.txt
 
 - Set up environmental variables in your operating system or in the .env file. The variables are:
 
-  - `DEBUG` (optional, `False` by default);
-  - `SECRET_KEY` (obligatory);
-  - `ALLOWED_HOSTS` (obligatory when `DEBUG` is set to `False`);
-  - `DATABASE` - database address (obligatory), go [here](https://github.com/jacobian/dj-database-url) for more;
-  - `STATIC_ROOT` - static root folder (obligatory).
+  - `DEBUG` - a boolean that turns on/off debug mode (optional, `False` by default);
+  - `SECRET_KEY` - a secret key for a particular Django installation (obligatory);
+  - `ALLOWED_HOSTS` - a list of strings representing the host/domain names that this Django site can serve (obligatory when `DEBUG` is set to `False`);
+  - `DATABASE` - a database address (obligatory), go [here](https://github.com/jacobian/dj-database-url) for more;
+  - `STATIC_ROOT` - a static root folder (obligatory).
 
 To set up variables in .env file, create it in the root directory of the project and fill it up like this:
 
