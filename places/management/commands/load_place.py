@@ -34,8 +34,8 @@ class Command(BaseCommand):
             lat = coordinates["lat"]
             place, created = Place.objects.get_or_create(lng=lng, lat=lat)
             place.title = place_card["title"]
-            place.description_short = place_card["description_short"]
-            place.description_long = place_card["description_long"]
+            place.short_description = place_card["description_short"]
+            place.long_description = place_card["description_long"]
             place.lng = lng
             place.lat = lat
             place.save()
