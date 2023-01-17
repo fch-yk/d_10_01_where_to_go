@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('__debug__/', include('debug_toolbar.urls')),
-    path('places/<int:place_id>', views.place_details),
+    path('places/<int:place_id>/', views.place_details),
     path('tinymce/', include('tinymce.urls')),
 ]
 if settings.DEBUG:
