@@ -26,7 +26,7 @@ pip install -r requirements.txt
   - `SECRET_KEY` - a secret key for a particular Django installation (obligatory);
   - `ALLOWED_HOSTS` - a list of strings representing the host/domain names that this Django site can serve (obligatory when `DEBUG` is set to `False`);
   - `DATABASE` - a database address (obligatory), go [here](https://github.com/jacobian/dj-database-url) for more;
-  - `STATIC_ROOT` - a static root folder (obligatory).
+  - `STATIC_ROOT` - a static root folder (optional, `/static/` by default).
 
 To set up variables in .env file, create it in the root directory of the project and fill it up like this:
 
