@@ -35,4 +35,4 @@ class Photo(models.Model):
         ordering = ["place__title", "position"]
 
     def __str__(self):
-        return f"{self.place.title} photo {self.position}"
+        return f"Photo {self.position} of {self.place.title}"
