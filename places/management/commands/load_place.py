@@ -29,16 +29,16 @@ class Command(BaseCommand):
             with open(file_path, 'r', encoding="UTF-8") as place_file:
                 place_card = json.load(place_file)
 
-            coordinates = place_card["coordinates"]
-            lng = coordinates["lng"]
-            lat = coordinates["lat"]
-            place, created = Place.objects.get_or_create(lng=lng, lat=lat)
-            place.title = place_card["title"]
-            place.short_description = place_card["description_short"]
-            place.long_description = place_card["description_long"]
-            place.lng = lng
-            place.lat = lat
-            place.save()
+            place, created = Place.objects.update_or_create(
+                lng=place_card["coordinates"]["lng"],
+                lat=place_card["coordinates"]["lat"],
+                defaults={
+                    "title": place_card["title"],
+                    "short_description": place_card["description_short"],
+                    "long_description": place_card["description_long"],
+
+                }
+            )
 
             if not created:
                 photos = Photo.objects.filter(place=place)
@@ -50,7 +50,9 @@ class Command(BaseCommand):
             for position, img_url in enumerate(imgs, start=1):
                 response = requests.get(img_url)
                 response.raise_for_status()
-                photo = Photo(place=place, position=position)
-                content = ContentFile(response.content)
                 filename = urlsplit(img_url).path.split(sep='/')[-1]
-                photo.image.save(filename, content, save=True)
+                photo = Photo.objects.create(
+                    place=place,
+                    position=position,
+                    image=ContentFile(response.content, name=filename)
+                )
