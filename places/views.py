@@ -4,7 +4,7 @@ from .models import Place
 from django.urls import reverse
 
 
-def home(request):
+def show_home(request):
 
     features = []
     for place in Place.objects.all():
