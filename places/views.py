@@ -33,9 +33,11 @@ def show_home(request):
 def place_details(request, place_id):
     place = get_object_or_404(Place, id=place_id)
     imgs = []
-    for photo in place.photos.all():
-        absolute_uri = request.build_absolute_uri(photo.image.url)
-        imgs.append(absolute_uri)
+
+    photos = place.photos.all()
+    imgs = [
+        request.build_absolute_uri(photo.image.url) for photo in photos
+    ]
 
     place_card = {
         "title": place.title,
