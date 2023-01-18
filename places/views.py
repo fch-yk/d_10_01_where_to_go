@@ -27,8 +27,7 @@ def home(request):
         "features": features,
     }
 
-    context = {"places": places}
-    return render(request, 'index.html', context=context)
+    return render(request, 'index.html', context={"places": places})
 
 
 def place_details(request, place_id):
@@ -49,5 +48,7 @@ def place_details(request, place_id):
         },
     }
 
-    dumps_params = {"ensure_ascii": False, "indent": 4}
-    return JsonResponse(place_card, json_dumps_params=dumps_params)
+    return JsonResponse(
+        place_card,
+        json_dumps_params={"ensure_ascii": False, "indent": 4}
+    )
