@@ -32,7 +32,10 @@ def show_home(request):
 
 def place_details(request, place_id):
 
-    place = get_object_or_404(Place, id=place_id)
+    place = get_object_or_404(
+        Place.objects.prefetch_related("photos"),
+        id=place_id
+    )
     photos = place.photos.all()
     imgs = [
         request.build_absolute_uri(photo.image.url) for photo in photos
